@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+<form method="post" th:action="@{/addBook}" th:object="${book}">
+
+    <div class="container" style="width: 50%">
+        <div class="header">
+            <h4 class="title">Book form</h4>
+            <p class="genre">Correct fields and save it please</p>
+        </div>
+
+        <div class="content">
+            <form th:object="${book}" th:action="@{/updateBook}" th:method="post">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" th:field="*{id}"/>
+                </div>
+                <div class="form-group">
+                    <label for="title">Book name</label>
+                    <input type="text" class="form-control" id="title" aria-describedby="title" th:field="*{title}"
+                           required playeholder="Book title: War and Peace" pattern="[A-Za-z0-9]+" title="Use only letters,numbers from A-z,0-9"/>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" id="author" aria-describedby="author" th:field="*{author}"
+                           required playeholder="Lev Tolstoy" pattern="[A-Za-z0-9]+" title="Use only letters from A-z"/>
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <select id="genre" class="form-control" th:field="*{genres}" multiple="multiple">
+                        <option th:each="genre : ${genres}" th:text="${genre.name}" th:value="${genre.id}"></option>
+                    </select>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-primary my-2 mr-2 my-sm-0" th:href="@{/index}">Back</a>
+            </form>
+
+</body>
+</html>
+
+

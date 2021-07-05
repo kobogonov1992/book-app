@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+<form method="post" th:action="@{/addGenre}" th:object="${genre}">
+        <div class="container" style="width: 50%">
+            <div class="header">
+                <h4 class="title">Form for genre</h4>
+                <p class="genre">Fill up the form please</p>
+            </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" th:field="*{id}"/>
+                </div>
+                <div class="form-group">
+                    <label for="name">Genre name</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="name" th:field="*{name}"
+                       required placeholder="Write it here ..." pattern="[A-Za-z0-9]+" title="Use only letters from A-z, some number"/>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-primary my-2 mr-2 my-sm-0" th:href="@{/index}">Back</a>
+    </div>
+
+</form>
+
+</body>
+</html>
+

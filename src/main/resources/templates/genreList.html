@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        .sidebar a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .sidebar a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+
+        @media screen and (max-width: 700px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .sidebar a {float: left;}
+            div.content {margin-left: 0;}
+        }
+
+        @media screen and (max-width: 400px) {
+            .sidebar a {
+                text-align: center;
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <a class="active" th:href="@{/index}">Book App</a>
+    <a class="h4"  th:href="@{/addBook}"> Add Book</a>
+    <a class="h4"  th:href="@{/books}"> Books</a>
+    <a class="h4"  th:href="@{/genres}"> Genres</a>
+    <a class="h4"  th:href="@{/addGenre}">Add Genre</a>
+    <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+        <button class="btn btn-outline-success my-2 my-sm-0">Back</button>
+    </form>
+</div>
+
+<div class="content table-responsive table-full-width">
+    <table class="table table-striped">
+        <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+        </thead>
+        <tbody>
+        <tr th:remove="all"/>
+        <tr th:each="genre : ${genres}">
+            <td th:text="${genre.id}"></td>
+            <td th:text="${genre.name}"></td>
+            <td><a th:href="@{updateGenre/{id}(id=${genre.id})}" class="btn btn-success">Edit</a></td>
+            <td><a th:href="@{deleteGenre/{id}(id=${genre.id})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</div>
+
+<div class="content">
+
+</div>
+
+</body>
+</html>
+
